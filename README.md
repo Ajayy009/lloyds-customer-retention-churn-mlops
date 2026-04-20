@@ -1,5 +1,4 @@
 ​**🏦 Lloyds Bank: End-to-End Customer Retention & Churn MLOps Pipeline**
-
 ​This repository demonstrates a full-stack Machine Learning solution developed for Lloyds Banking Group. It bridges the gap between deep Exploratory Data Analysis (EDA) and Production-Ready Engineering.
 ​🧠 Part 1: The "Brain" (DA, DS & Retention Strategy)
 

@@ -1,24 +1,30 @@
 from fastapi import FastAPI
-import mlflow.sklearn
 import pandas as pd
+import joblib
 
 app = FastAPI()
 
-# This is the 'Showroom' path
-model_uri = "models:/Lloyds_Churn_Production_Project/1"
-
+# 1. Load the model directly from the file we just saved
+# This makes it independent of MLflow
 try:
-    model = mlflow.sklearn.load_model(model_uri)
-    print("SUCCESS: Lloyds Model is now LIVE in FastAPI!")
+    model = joblib.load("model.pkl")
+    print("SUCCESS: Lloyds Model is now LIVE via local pickle file!")
 except Exception as e:
-    print(f"STILL LOADING: {e}")
+    print(f"ERROR LOADING MODEL: {e}")
 
 @app.get("/")
 def home():
-    return {"status": "Online"}
+    return {"status": "Online", "mode": "Docker-Ready"}
 
 @app.post("/predict")
 def predict(data: dict):
+    # Convert incoming JSON data to a DataFrame for the model
     df = pd.DataFrame([data])
+    
+    # Generate prediction
     prediction = model.predict(df)[0]
-    return {"prediction": "Churn" if prediction == 1 else "Stay"}
+    
+    return {
+        "prediction": "Churn" if prediction == 1 else "Stay",
+        "model_version": "Tuned_RF_Local"
+    }
