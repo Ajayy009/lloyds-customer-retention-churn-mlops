@@ -1,5 +1,5 @@
 # Use a Python base image
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -8,9 +8,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 2. Copy ONLY the files we need for the API to run
-COPY main.py .
-COPY model.pkl .
+# 2. Copy the files we need for the API to run
+COPY . .
 
 # Expose the port FastAPI runs on
 EXPOSE 8000
