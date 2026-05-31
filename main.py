@@ -1,35 +1,39 @@
 from fastapi import FastAPI
 import pandas as pd
-import joblib
-import mlflow
+import pickle
 import os
 
 app = FastAPI()
 
-# 1. Setup Direct Connection to the Shared Volume
-MLFLOW_TRACKING_URI = "sqlite:////mlflow_data/mlflow.db"
-mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
-
+# Load XGBoost model from pickle
 try:
-    # Load from MLflow registry
-    model_uri = "models:/Lloyds_Churn_Production_Project_V2/1"
-    model = mlflow.pyfunc.load_model(model_uri)
-    print("SUCCESS: Loaded from MLflow Registry!")
-    model_source = "MLflow Registry"
+    with open("best_xgb_model.pkl", "rb") as f:
+        model = pickle.load(f)
+    print("SUCCESS: Loaded XGBoost model from pickle!")
+    model_source = "XGBoost Pickle"
 except Exception as e:
-    print(f"MLflow failed ({e}). Using pickle...")
-    model = joblib.load("model.pkl")
-    model_source = "Local Pickle (Backup)"
+    print(f"Failed to load model: {e}")
+    model = None
+    model_source = "Failed"
+
+THRESHOLD = 0.3  # Same threshold you used in training
 
 @app.get("/")
 def home():
-    return {"status": "Online", "mode": "Shared-Volume-Access", "brain_source": model_source}
+    return {
+        "status": "Online",
+        "model": "XGBoost",
+        "model_source": model_source
+    }
 
 @app.post("/predict")
 def predict(data: dict):
     df = pd.DataFrame([data])
-    prediction = model.predict(df)[0]
+    prob = model.predict_proba(df)[0][1]
+    prediction = int(prob >= THRESHOLD)
     return {
         "prediction": "Churn" if prediction == 1 else "Stay",
+        "churn_probability": round(float(prob), 4),
+        "threshold_used": THRESHOLD,
         "model_used": model_source
     }
