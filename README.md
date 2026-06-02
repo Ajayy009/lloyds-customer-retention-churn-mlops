@@ -167,7 +167,7 @@ Implemented:
 
 Although XGBoost was selected as the final deployment model, Random Forest feature importance analysis provided valuable business insights into customer churn behaviour.
 
-![Random Forest Feature Importance](assets/rf_feature_importance.png)
+![Random Forest Feature Importance](assets/random_forest_feature_importance.png)
 
 ---
 
@@ -242,7 +242,7 @@ Capabilities:
 
 #### Live Prediction Output
 
-![FastAPI Output](assets/Fastapi_output.png)
+![FastAPI Output](assets/fastapi_output.png)
 
 ---
 
