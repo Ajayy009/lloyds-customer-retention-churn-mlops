@@ -1,30 +1,19 @@
 # 🏦 Lloyds Bank Customer Retention & Churn Prediction MLOps Pipeline
 
-<!-- Paste this right below your main project title h1 -->
 ![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
+![Scikit-Learn](https://img.shields.io/badge/scikit_learn-F7931E?style=flat&logo=scikit-learn&logoColor=white)
+![Random Forest](https://img.shields.io/badge/Random_Forest-43A047?style=flat)
+![XGBoost](https://img.shields.io/badge/XGBoost-2C8EBB?style=flat)
+![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=flat&logo=mlflow&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
-![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=flat&logo=mlflow&logoColor=white)
-![Scikit-Learn](https://img.shields.io/badge/scikit_learn-F7931E?style=flat&logo=scikit-learn&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-2C8EBB?style=flat)
+
 
 ## 📌 Project Overview
 
 This project delivers an end-to-end Machine Learning and MLOps solution for customer churn prediction using a Lloyds Banking Group customer dataset.
 
 The objective is to identify customers at risk of churn and support proactive retention strategies through predictive analytics, experimentation, and production-ready deployment.
-
-The project spans the complete lifecycle:
-
-- Data Exploration & Business Understanding
-- Feature Engineering & Preprocessing
-- Model Development & Validation
-- Class Imbalance Handling
-- Model Comparison & Selection
-- MLOps Lifecycle Management
-- API Deployment & Containerization
-
-
 
 ```mermaid
 graph TD
