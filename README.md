@@ -33,10 +33,10 @@ graph TD
     G[SMOTE Balancing]:::process
     
     subgraph Model_Phase [Model Development & Evaluation]
-        H[Random Forest]:::model
-        I[XGBoost]:::model
-        J{Model Comparison}:::model
-        K[Final XGBoost Model]:::model
+        H[Train Baseline Random Forest]:::model
+        I[Train Advanced XGBoost]:::model
+        J{Compare Evaluation Scores}:::model
+        K[Select Best Model: XGBoost]:::model
     end
 
     L[MLflow Tracking]:::deploy
@@ -53,16 +53,16 @@ graph TD
     E --> F
     F --> G
     G --> H
-    G --> I
-    H --> J
+    H --> I
     I --> J
-    J --> K
+    J -- "XGBoost Outperforms RF" --> K
     K --> L
     L --> M
     M --> N
     N --> O
-    O --> P
- ```
+    O --> P 
+```
+
 
 
 ## 📊 Dataset & Business Problem
